@@ -66,6 +66,7 @@ button {
   border-radius: 50px;
   border: none;
   cursor: pointer;
+  margin: 10px;
 }
 
 #yesBtn {
@@ -85,9 +86,10 @@ button {
 }
 
 .cat {
-  width: 120px;
+  width: 200px;
   margin: 20px;
   animation: spin 12s linear infinite;
+  border-radius: 20px;
 }
 
 @keyframes spin {
@@ -97,6 +99,11 @@ button {
 
 .question-box {
   margin-top: 40px;
-  font-size: 1.4em;
+  font-size: 1.2em;
   color: #ff4d6d;
+}
+
+#answers button {
+  display: block;
+  margin: 10px auto;
 }
