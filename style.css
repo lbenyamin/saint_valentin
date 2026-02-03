@@ -82,12 +82,12 @@ button {
 
 /* Chats */
 .cats {
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .cat {
   width: 50px;
-  margin: 20px;
+  margin: 10px;
   animation: spin 12s linear infinite;
   border-radius: 40px;
 }

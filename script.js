@@ -14,6 +14,8 @@ const answersEl = document.getElementById("answers");
 // Bouton NON qui fuit
 function moveNoButton() {
   const container = document.querySelector(".buttons");
+  if (!container) return;
+
   const maxX = container.offsetWidth - noBtn.offsetWidth;
   const maxY = container.offsetHeight - noBtn.offsetHeight;
 
@@ -34,18 +36,18 @@ yesBtn.addEventListener("click", () => {
 });
 
 /***********************
- * ÉTAT INTERNE
+ * ÉTAT
  ***********************/
 const state = {
-  context: null,       // interieur / exterieur
-  timing: null,        // jourJ / pasJourJ
-  place: null,         // moi / elle / brasserie / gastro / aVolonte
-  dinnerScale: null,   // normal / gros
-  chef: null,          // moi / elle
-  romance: null,       // intense / discussion
-  activity: null,      // role / detective / sexy / chill
-  after: null,         // theatre / boite / chill / rien
-  gift: null,          // gros / petit / aucun
+  context: null,   // interieur / exterieur
+  timing: null,    // jourJ / pasJourJ
+  place: null,     // moi / elle / brasserie / gastro / aVolonte
+  dinnerScale: null,
+  chef: null,
+  romance: null,   // intense / discussion
+  activity: null,  // jeu / sexy / chill
+  after: null,     // theatre / boite / chill
+  gift: null,      // gros / petit / aucun
   idea: ""
 };
 
@@ -57,90 +59,83 @@ const questions = [
     text: "🌙 Pour cette soirée, tu nous imagines plutôt…",
     choices: [
       { label: "🕯️ Dans un cocon, rien que nous", action: () => state.context = "interieur" },
-      { label: "🌃 Sortir, bouger, voir du monde", action: () => state.context = "exterieur" }
+      { label: "🌃 Sortir, à l'aventure", action: () => state.context = "exterieur" }
     ]
   },
   {
     text: "📅 On fête ça quand ?",
     choices: [
-      { label: "💘 Le jour exact de la Saint-Valentin", action: () => state.timing = "jourJ" },
-      { label: "😌 Un autre jour, tranquille", action: () => state.timing = "pasJourJ" }
+      { label: "💘 Le jour exact", action: () => state.timing = "jourJ" },
+      { label: "😌 Un autre jour", action: () => state.timing = "pasJourJ" }
     ]
   },
   {
     condition: () => state.context === "interieur",
-    text: "🏡 On se retrouve où pour commencer la soirée ?",
+    text: "🏡 On se retrouve où ?",
     choices: [
       { label: "Chez toi", action: () => state.place = "elle" },
-      { label: "Chez moi", action: () => state.place = "moi" },
-      { label: "À distance, mais avec amour 💻", action: () => state.place = "visio" }
+      { label: "Chez moi", action: () => state.place = "moi" }
     ]
   },
   {
     condition: () => state.context === "exterieur",
-    text: "🍽️ Tu préfères un endroit plutôt…",
+    text: "🍽️ Tu préfères quel genre d’endroit ?",
     choices: [
-      { label: "Simple et chaleureux", action: () => state.place = "brasserie" },
-      { label: "Qui marque vraiment le coup", action: () => state.place = "gastro" },
-      { label: "Sans prise de tête, on profite", action: () => state.place = "aVolonte" }
+      { label: "Chaleureux et simple", action: () => state.place = "brasserie" },
+      { label: "Gastronomique", action: () => state.place = "gastro" },
+      { label: "À volonté, sans pression", action: () => state.place = "aVolonte" }
     ]
   },
   {
     condition: () => state.context === "interieur",
-    text: "🍝 Le dîner, on le veut comment ?",
+    text: "🍝 Le dîner, on le voit comment ?",
     choices: [
-      { label: "Juste ce qu’il faut", action: () => state.dinnerScale = "normal" },
-      { label: "Un vrai moment à part entière", action: () => state.dinnerScale = "gros" }
+      { label: "Simple et efficace", action: () => state.dinnerScale = "normal" },
+      { label: "Un vrai moment fort", action: () => state.dinnerScale = "gros" }
     ]
   },
   {
     condition: () => state.context === "interieur",
-    text: "👨‍🍳 Qui met le tablier ?",
+    text: "👨‍🍳 Qui cuisine ?",
     choices: [
       { label: "Toi 😏", action: () => state.chef = "elle" },
       { label: "Moi 😎", action: () => state.chef = "moi" }
     ]
   },
   {
-    text: "💕 L’ambiance idéale pour toi ?",
+    text: "💕 L’ambiance idéale ?",
     choices: [
-      { label: "Intense et un peu fou", action: () => state.romance = "intense" },
-      { label: "Doux et complice", action: () => state.romance = "discussion" }
+      { label: "Intense", action: () => state.romance = "intense" },
+      { label: "Douce et complice", action: () => state.romance = "discussion" }
     ]
   },
   {
-    text: "🧠 Ce qui te ferait le plus sourire après le dîner…",
+    text: "🧠 Après le dîner, tu préfèrerais…",
     choices: [
-      { label: "Imprevisible...", action: () => state.activity = "sexy" },
-      { label: "Joueur", action: () => state.activity = state.romance === "intense" ? "role" : "detective" },
-      { label: "Tranquille, on prend le temps", action: () => state.activity = "chill" }
+      { label: "Un moment un peu interdit 😈", action: () => state.activity = "sexy" },
+      { label: "Un jeu à deux", action: () => state.activity = "jeu" },
+      { label: "Juste profiter calmement", action: () => state.activity = "chill" }
     ]
   },
   {
     condition: () => state.context === "exterieur",
-    text: "🌙 Et quand la nuit continue…",
+    text: "🌙 Et la suite de la soirée ?",
     choices: [
-      { label: "On prolonge dehors", action: () => state.after = "boite" },
-      { label: "On rentre tranquillement", action: () => state.after = "chill" },
-      { label: "Activite exterieur", action: () => state.after = "theatre" }
+      { label: "Continuer dehors", action: () => state.after = "boite" },
+      { label: "Rentrer et prolonger", action: () => state.after = "chill" },
+      { label: "Une sortie culturelle", action: () => state.after = "theatre" }
     ]
   },
   {
-    text: "🎁 Un petit plus pour accompagner la soirée ?",
+    text: "🎁 Un petit plus ?",
     choices: [
-      { label: "Un truc qui marque vraiment le coup", action: () => state.gift = "gros" },
-      { label: "Un truc qui fait juste sourire", action: () => state.gift = "petit" },
-      { label: "Non, le moment suffit", action: () => state.gift = "aucun" }
+      { label: "Oui, quelque chose de marquant", action: () => state.gift = "gros" },
+      { label: "Un petit clin d’œil", action: () => state.gift = "petit" },
+      { label: "Non", action: () => state.gift = "aucun" }
     ]
   },
   {
-    text: "📵 On se coupe du monde ?",
-    choices: [
-      { label: "Oui, zéro téléphone", action: () => {} }
-    ]
-  },
-  {
-    text: "✍️ Si tu ajoutes une touche perso à la soirée…",
+    text: "✍️ Une touche perso ?",
     input: true
   }
 ];
@@ -153,8 +148,13 @@ let index = 0;
 function showQuestion() {
   answersEl.innerHTML = "";
 
-  while (questions[index].condition && !questions[index].condition()) {
+  while (questions[index]?.condition && !questions[index].condition()) {
     index++;
+  }
+
+  if (index >= questions.length) {
+    showResult();
+    return;
   }
 
   const q = questions[index];
@@ -163,11 +163,16 @@ function showQuestion() {
   if (q.input) {
     const input = document.createElement("input");
     input.placeholder = "Écris ici 💕";
-    input.onchange = () => {
+
+    const btn = document.createElement("button");
+    btn.textContent = "Valider 💖";
+    btn.onclick = () => {
       state.idea = input.value;
       showResult();
     };
+
     answersEl.appendChild(input);
+    answersEl.appendChild(btn);
   } else {
     q.choices.forEach(choice => {
       const btn = document.createElement("button");
@@ -192,30 +197,43 @@ function showResult() {
   let text = "";
 
   if (state.context === "interieur") {
-    text += `On commencera par un dîner ${state.dinnerScale === "gros" ? "généreux et mémorable" : "tout en douceur"} `;
-    text += `chez ${state.place === "moi" ? "moi" : "toi"}, `;
-    text += state.activity === "detective" ? "avec un jeu plein de mystère, " :
-            state.activity === "role" ? "avec une activité où on se mettra dans la peau de personnages, " :
-            state.activity === "sexy" ? "dans une ambiance sexy de A à Z, " :
-            "en mode chill absolu, ";
+    text += `On commencera par un dîner ${state.dinnerScale === "gros" ? "généreux" : "tout en douceur"} `;
+    text += state.place === "moi" ? "chez LUCAS, " : "chez LOLA, ";
+
+    if (state.activity === "jeu") {
+      text += state.romance === "intense"
+        ? "avec un jeu de rôle très immersif, "
+        : "avec un jeu de détective plein de mystère, ";
+    }
+    if (state.activity === "sexy") text += "dans une ambiance sexy de A à Z, ";
+    if (state.activity === "chill") text += "en mode chill absolu, ";
   } else {
     text += "On ira dîner dehors, ";
-    text += state.place === "gastro" ? "dans un restaurant gastronomique, " :
-            state.place === "aVolonte" ? "dans un resto à volonté sans pression, " :
-            "dans une petite brasserie pleine de charme, ";
+    text += state.place === "gastro"
+      ? "dans un restaurant gastronomique, "
+      : state.place === "aVolonte"
+      ? "dans un resto à volonté, "
+      : "dans une petite brasserie, ";
+
     if (state.after === "theatre") text += "avant d’enchaîner avec une sortie culturelle, ";
     if (state.after === "boite") text += "avant de finir la nuit en boîte, ";
+
+    if (state.after === "chill") {
+      text += "puis de rentrer pour prolonger la soirée ";
+      if (state.activity === "jeu") text += "avec un jeu complice à deux, ";
+      if (state.activity === "sexy") text += "dans une ambiance sexy, ";
+      if (state.activity === "chill") text += "en toute simplicité, ";
+    }
   }
 
-  if (state.gift === "gros") text += "avec un cadeau qui ne passera pas inaperçu, ";
+  if (state.gift === "gros") text += "avec un cadeau inoubliable, ";
   if (state.gift === "petit") text += "avec un petit cadeau plein d’attention, ";
 
-  if (state.idea) text += `et ta petite touche perso : "${state.idea}".`;
+  if (state.idea) text += `et ta touche perso : "${state.idea}".`;
 
   const p = document.createElement("p");
   p.textContent = text;
   p.style.color = "#ff4d6d";
   p.style.fontSize = "1.3em";
   answersEl.appendChild(p);
-
 }
