@@ -81,16 +81,16 @@ const questions = [
     condition: () => state.context === "exterieur",
     text: "🍽️ Tu préfères quel genre d’endroit ?",
     choices: [
-      { label: "Chaleureux et simple", action: () => state.place = "brasserie" },
-      { label: "Gastronomique", action: () => state.place = "gastro" },
-      { label: "À volonté, sans pression", action: () => state.place = "aVolonte" }
+      { label: "Simple et chaleureux", action: () => state.place = "brasserie" },
+      { label: "Qui marque vraiment le coup", action: () => state.place = "gastro" },
+      { label: "Sans pression, on mange sans compter", action: () => state.place = "aVolonte" }
     ]
   },
   {
     condition: () => state.context === "interieur",
     text: "🍝 Le dîner, on le voit comment ?",
     choices: [
-      { label: "Simple et efficace", action: () => state.dinnerScale = "normal" },
+      { label: "Juste ce qu’il faut", action: () => state.dinnerScale = "normal" },
       { label: "Un vrai moment fort", action: () => state.dinnerScale = "gros" }
     ]
   },
@@ -105,34 +105,40 @@ const questions = [
   {
     text: "💕 L’ambiance idéale ?",
     choices: [
-      { label: "Intense", action: () => state.romance = "intense" },
+      { label: "Intense et un peu fou", action: () => state.romance = "intense" },
       { label: "Douce et complice", action: () => state.romance = "discussion" }
     ]
   },
   {
     text: "🧠 Après le dîner, tu préfèrerais…",
     choices: [
-      { label: "Un moment un peu interdit 😈", action: () => state.activity = "sexy" },
+      { label: "Un moment imprevisible... 😈", action: () => state.activity = "sexy" },
       { label: "Un jeu à deux", action: () => state.activity = "jeu" },
-      { label: "Juste profiter calmement", action: () => state.activity = "chill" }
+      { label: "Juste profiter calmement, rien de spé", action: () => state.activity = "chill" }
     ]
   },
   {
     condition: () => state.context === "exterieur",
     text: "🌙 Et la suite de la soirée ?",
     choices: [
-      { label: "Continuer dehors", action: () => state.after = "boite" },
+      { label: "On prolonge dehors", action: () => state.after = "boite" },
       { label: "Rentrer et prolonger", action: () => state.after = "chill" },
       { label: "Une sortie culturelle", action: () => state.after = "theatre" }
     ]
   },
   {
-    text: "🎁 Un petit plus ?",
+    text: "🎁 Un petit plus pour accompagner la soirée ?",
     choices: [
-      { label: "Oui, quelque chose de marquant", action: () => state.gift = "gros" },
-      { label: "Un petit clin d’œil", action: () => state.gift = "petit" },
-      { label: "Non", action: () => state.gift = "aucun" }
+      { label: "Un truc qui marque vraiment le coup", action: () => state.gift = "gros" },
+      { label: "Un truc qui fait juste sourire", action: () => state.gift = "petit" },
+      { label: "Non, le moment suffit", action: () => state.gift = "aucun" }
     ]
+  },
+  { 
+    text: "📵 On se coupe du monde ?", 
+    choices: [ 
+      { label: "Oui, zéro téléphone", action: () => {} } 
+    ] 
   },
   {
     text: "✍️ Une touche perso ?",
