@@ -218,10 +218,4 @@ function showResult() {
   p.style.fontSize = "1.3em";
   answersEl.appendChild(p);
 
-  const gif = document.createElement("img");
-  gif.src = "https://media.giphy.com/media/W7EJotgttgL6w/giphy.gif";
-  gif.style.width = "260px";
-  gif.style.marginTop = "25px";
-  gif.style.borderRadius = "20px";
-  answersEl.appendChild(gif);
 }
