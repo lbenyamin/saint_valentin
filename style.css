@@ -86,7 +86,7 @@ button {
 }
 
 .cat {
-  width: 100px;
+  width: 80px;
   margin: 10px;
   animation: spin 12s linear infinite;
   border-radius: 40px;
