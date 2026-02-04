@@ -204,7 +204,7 @@ function showResult() {
 
   if (state.context === "interieur") {
     text += `On commencera par un dîner ${state.dinnerScale === "gros" ? "généreux" : "tout en douceur"} `;
-    text += state.place === "moi" ? "chez LUCAS, " : "chez LOLA, ";
+    text += state.place === "moi" ? "chez Lucas, " : "chez Lola, ";
 
     if (state.activity === "jeu") {
       text += state.romance === "intense"
